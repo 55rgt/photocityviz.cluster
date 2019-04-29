@@ -15,7 +15,7 @@ import json
 NUM_OF_CLUSTERS = 4
 FILE_OUTPUT_NAME = 'sample'
 
-with open('./data/Total_vision_merged_short.json') as json_file:
+with open('./data/Total_vision_merged_short_.json') as json_file:
     json_data = json.load(json_file)
 
 nameList = []
