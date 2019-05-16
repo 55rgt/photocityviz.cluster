@@ -5,7 +5,7 @@ import json
 NUM_OF_CLUSTERS = 10
 FILE_OUTPUT_NAME = 'agglomerative'
 
-with open('./data/Total_vision_merged_short.json') as json_file:
+with open('./data/Total_refined_short.json') as json_file:
     json_data = json.load(json_file)
 
 nameList = []
@@ -27,8 +27,22 @@ X = csr_matrix((data, indices, indptr), dtype=float).toarray()
 
 print(X)
 
-AC = AgglomerativeClustering(n_clusters=NUM_OF_CLUSTERS).fit_predict(X)
+AC = AgglomerativeClustering(n_clusters=NUM_OF_CLUSTERS)
 
-with open('./output/{}_clusters_{}.json'.format(FILE_OUTPUT_NAME, NUM_OF_CLUSTERS), 'w') as outfile:
-    json.dump(AC.labels_.tolist(), outfile)
+lenX = len(X)
 
+sum = 0
+
+for i in range(100):
+    start = int(lenX * i / 100)
+    end = int(lenX * (i + 1) / 100)
+    # print(start, end)
+    result = AC.fit_predict(X[start: end])
+    print(len(result))
+    sum += len(result)
+    # fit_predict 얘가 지금 1000 result  근데 데이터 1000
+    # print(result)
+print(sum)
+
+# with open('./output/{}_clusters_{}.json'.format(FILE_OUTPUT_NAME, NUM_OF_CLUSTERS), 'w') as outfile:
+#     json.dump(AC.labels_.tolist(), outfile)

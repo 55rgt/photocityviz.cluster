@@ -2,10 +2,10 @@ from scipy.sparse import csr_matrix
 from sklearn.cluster import Birch
 import json
 
-NUM_OF_CLUSTERS = 4
+NUM_OF_CLUSTERS = 10
 FILE_OUTPUT_NAME = 'birch'
 
-with open('./data/Total_vision_merged_short_.json') as json_file:
+with open('./data/Total_refined_short_10_.json') as json_file:
     json_data = json.load(json_file)
 
 nameList = []
@@ -28,5 +28,5 @@ print(X)
 
 brc = Birch(n_clusters=NUM_OF_CLUSTERS).fit(X)
 
-with open('./output/{}_clusters_{}.json'.format(FILE_OUTPUT_NAME, NUM_OF_CLUSTERS), 'w') as outfile:
+with open('./output/cluster_sample_.json'.format(FILE_OUTPUT_NAME, NUM_OF_CLUSTERS), 'w') as outfile:
     json.dump(brc.labels_.tolist(), outfile)

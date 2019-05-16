@@ -41,14 +41,15 @@ print('AC')
 
 AC.fit(X_train)
 
+
 print('After fitting')
 labels = AC.labels_
 print(labels)
 
-# KN = KNeighborsClassifier()
-# KN.fit(X_train, labels)
-# labels2 = KN.predict(X)
-#
+KN = KNeighborsClassifier()
+KN.fit(X_train, labels)
+labels2 = KN.predict(X)
+
 # print(labels2)
 
 # agglomerative = AgglomerativeClustering(n_clusters=NUM_OF_CLUSTERS).fit(X)

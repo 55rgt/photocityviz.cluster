@@ -2,10 +2,10 @@ from scipy.sparse import csr_matrix
 from sklearn.cluster import MiniBatchKMeans
 import json
 
-NUM_OF_CLUSTERS = 5
+NUM_OF_CLUSTERS = 12
 FILE_OUTPUT_NAME = 'miniBatchKMeans'
 
-with open('./data/Total_vision_merged_short_.json') as json_file:
+with open('./data/Total_refined_short_10_.json') as json_file:
     json_data = json.load(json_file)
 
 nameList = []
