@@ -1,21 +1,15 @@
-from lifelines import CoxPHFitter
-from lifelines.datasets import load_rossi
+import random
+array = [{'name': 'Tom', 'age': 24},{'name': 'Mike', 'age': 42}, {'name': 'Kate', 'age': 14}]
+random.shuffle(array)
+print(array)
 
-rossi = load_rossi()
 
-print(rossi)
+a = []
 
-cph = CoxPHFitter()
-cph.fit(rossi, duration_col="week", event_col="arrest")
+b = [1, 2, 3, 4]
+c = [5, 6, 7, 8]
 
-print(cph)
+a.extend(b)
+a.extend(c)
 
-# Three ways to view the c-index:
-# method one
-
-# method two
-print(cph.score_)
-
-# method three
-from lifelines.utils import concordance_index
-# print(concordance_index(rossi['week'], -cph.predict_partial_hazard(rossi), rossi['arrest']))
+print(a)
