@@ -3,14 +3,14 @@ from sklearn.cluster import AgglomerativeClustering
 import json
 import random
 
-NUM_OF_CLUSTERS = 10
+NUM_OF_CLUSTERS = 12
 FILE_OUTPUT_NAME = 'Agglomerative'
-ITERATION = 3
+ITERATION = 30
 DIVISION = 100
 
 accData = {}
 
-with open('./data/Total_refined_short_10.json') as json_file:
+with open('../data/Total_refined_short_10.json') as json_file:
     json_data = json.load(json_file)
 
 for n in range(ITERATION):
@@ -30,25 +30,32 @@ for n in range(ITERATION):
             data.append(datum['labels_m'][label])
         indptr.append(len(indices))
     X = csr_matrix((data, indices, indptr), dtype=float).toarray()
+    # initialize data if first
     if n == 0:
         for name in nameList:
             accData[name] = []
+    # clustering
     AC = AgglomerativeClustering(n_clusters=NUM_OF_CLUSTERS)
-    lenX = len(X)
-    summation = 0
-    result_total = []
-    for i in range(DIVISION):
-        start = int(lenX * i / DIVISION)
-        end = int(lenX * (i + 1) / DIVISION)
-        result_trial = AC.fit_predict(X[start: end])
-        # print(len(result))
-        result_total.extend(result_trial)
-        summation += len(result_trial)
-        if i == 1:
-            print(result_trial)
-        # fit_predict 얘가 지금 1000 result  근데 데이터 1000
-        # print(result)
-    print(summation)
+    result = AC.fit(X[0:14400])
+    print(result.labels_)
+
+
+
+    # lenX = len(X)
+    # result_total   = []
+    # for i in range(DIVISION):
+    #     start = int(lenX * i / DIVISION)
+    #     end = int(lenX * (i + 1) / DIVISION)
+    #     result_trial = AC.fit_predict(X[start: end])
+    #     result_total.extend(result_trial)
+    # # push data into accData
+    # for j in range(len(nameList)):
+    #     accData[nameList[j]].append(result_total[j])
+
+# print(accData[list(accData.keys())[0]])
+
+
+
 
 
 

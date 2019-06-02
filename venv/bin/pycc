@@ -1,0 +1,3 @@
+#!/Users/hyunsik/Project/photocityviz.cluster/venv/bin/python
+from numba.pycc import main
+main()
